@@ -63,7 +63,29 @@ Actualmente el log se encuentra en un nivel DEBUG para babelEmployee.log y algun
 - **Ejemplo QUERIES: sqlQueries.log**
    ![QUERIES](https://github.com/jacito/babel_test_images/blob/main/proyecto/log/queries.jpg)
 
+### Bitacora
+Se manejan dos tipos de bitacoras
+1.- eventLog: que se trata de todos los eventos exitosos
+2.- errorLog: que se trata de todos los eventos fallidos controlados
+
+![TablasBitacoras](https://github.com/jacito/babel_test_images/blob/main/proyecto/bitacoras.jpg)
+
 ### Contrato
+El servicio REST actual cuenta con las siguientes operaciones
+| Tipo Método| Operacion| Descripción|
+|-----------|-------------|----------|
+| GET | getActiveEmployees | Obtiene todos los empleados en estado ACTIVO. El borrado es solo lógico.|
+| GET | getAllEmployees | Obtienen todos los empleados sin importar su estado.|
+| POST | addEmployees| Añade uno o vatios empleados.|
+| GET | getEmployeeById| Obtiene un empleado por su ID.|
+| DEL |deleteEmployee | Elimina un empleado por su ID. Hace el cambio lógico a INACTIVO.|
+| PUT |updateEmployee | Actualiza un empleado por su ID y la data proporcionada.|
+
+Para mayor información sobre los métodos se puede consultar el siguiente link
+[![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)](https://documenter.getpostman.com/view/22553284/2sAYdZsYZB)
+
+También puede descargar la colección de operaciones para Postmant
+[![Descargar](https://github.com/jacito/babel_test_images/blob/main/contrato/operaciones.jpg)](https://raw.githubusercontent.com/jacito/babel_test_images/main/contrato/BabelEmployeeCollection.rar)
 
 
 ### Pruebas
