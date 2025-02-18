@@ -82,9 +82,10 @@ El servicio REST actual cuenta con las siguientes operaciones
 | PUT |updateEmployee | Actualiza un empleado por su ID y la data proporcionada.|
 
 Para mayor información sobre los métodos se puede consultar el siguiente link
-[![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)](https://documenter.getpostman.com/view/22553284/2sAYdZsYZB)
+[![GitHub Logo](https://github.com/jacito/babel_test_images/blob/main/contrato/logoPostman.png)](https://documenter.getpostman.com/view/22553284/2sAYdZsYZB)
 
 También puede descargar la colección de operaciones para Postmant
+
 [![Descargar](https://github.com/jacito/babel_test_images/blob/main/contrato/operaciones.jpg)](https://raw.githubusercontent.com/jacito/babel_test_images/main/contrato/BabelEmployeeCollection.rar)
 
 
