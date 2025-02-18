@@ -3,11 +3,11 @@ Prueba Técnica Babel
 <br><br>
 
 ## Introducción
-La prueba consiste en un servicio REST que contenga las siguientes operaciones: 
-• API que recupere el listado de todos los empleados registrados. 
-• API que borre un empleado, requiere como parámetro el id de registro. 
-• API que actualice cualquier dato del empleado. 
-• API que inserte uno o varios empleados en una sola petición. 
+La prueba consiste en un servicio REST que contenga las siguientes operaciones: <br>
+• API que recupere el listado de todos los empleados registrados. <br>
+• API que borre un empleado, requiere como parámetro el id de registro. <br>
+• API que actualice cualquier dato del empleado. <br>
+• API que inserte uno o varios empleados en una sola petición. <br>
 <br><br>
 
 ## Stack Tecnológico 
