@@ -68,8 +68,8 @@ Actualmente el log se encuentra en un nivel DEBUG para babelEmployee.log y algun
   ![HEADERS](https://github.com/jacito/babel_test_images/blob/main/proyecto/log/headers.jpg)
 - **Ejemplo QUERIES: sqlQueries.log**
    ![QUERIES](https://github.com/jacito/babel_test_images/blob/main/proyecto/log/queries.jpg)
-
 <br><br>
+
 ### Bitacora
 Se manejan dos tipos de bitacoras
 1.- eventLog: que se trata de todos los eventos exitosos
