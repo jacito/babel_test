@@ -1,0 +1,53 @@
+<configuration>
+
+    <!-- Console appender -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %5level - %logger{36} - %class{1}:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- General file appender -->
+    <appender name="fileGeneral" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/babelEmployee.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/babelEmployee-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %5level - %logger{36} - %class{1}:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- SQL query file appender -->
+    <appender name="fileSQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/sqlQueries.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/sqlQueries-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - SQL QUERY - %logger{36} - %class{1}:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="console"/>
+        <appender-ref ref="fileGeneral"/>
+    </root>
+
+    <logger name="org.hibernate.SQL" level="DEBUG">
+        <appender-ref ref="fileGeneral"/>
+    </logger>
+
+    <logger name="org.hibernate.SQL" level="DEBUG">
+        <appender-ref ref="fileSQL"/>
+    </logger>
+
+    <logger name="org.hibernate.type.descriptor.sql" level="TRACE">
+        <appender-ref ref="fileSQL"/>
+    </logger>
+
+</configuration>
