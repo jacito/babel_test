@@ -41,14 +41,29 @@ Gestiona las solicitudes HTTP. Aquí se encuentra el controlador principal (úni
 4. exception
 Contiene las clases de manejo de excepciones globales.
 
-5.vo
+5. vo
 Aquí se encuentran el Value Objects utilizado en el sistema para representar entidades: EmployeeVO.
 
 ![estructura](https://github.com/jacito/babel_test_images/blob/main/proyecto/Estructura.jpg)
 
-### Documentación de código
+### Logs
+Actualmente se manejan dos logs, que se estan creando dentro de la estructura del proyecto al correr el aplicativo con el IDE de IntelliJ
+![LOGS](https://github.com/jacito/babel_test_images/blob/main/proyecto/log/logs.jpg)
 
+1.- babelEmployee.log: que imprime todo
+![babelEmployee.log](https://github.com/jacito/babel_test_images/blob/main/proyecto/log/log1.jpg)
 
-### Postman 
+2.- sqlQueries.log: que contiene información sobre la ejecución de operaciones en la base de datos.
+![sqlQueries.log](https://github.com/jacito/babel_test_images/blob/main/proyecto/log/log2.jpg)
+
+Actualmente el log se encuentra en un nivel DEBUG para babelEmployee.log y algunos TRACE para sqlQueries.log
+
+- **Ejemplo HEADERS: babelEmployee.log**
+  ![HEADERS](https://github.com/jacito/babel_test_images/blob/main/proyecto/log/headers.jpg)
+- **Ejemplo QUERIES: sqlQueries.log**
+   ![QUERIES](https://github.com/jacito/babel_test_images/blob/main/proyecto/log/queries.jpg)
+
+### Contrato
+
 
 ### Pruebas
