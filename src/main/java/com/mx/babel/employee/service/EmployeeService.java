@@ -10,6 +10,7 @@ import com.mx.babel.employee.db.model.enums.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -90,7 +91,7 @@ public class EmployeeService {
                 );
                 return employeeVO;
             } else {
-                throw new EmployeeNotFoundException("Employee [" + id + "] not found");
+                return null;
             }
         } catch (Exception ex) {
             logger.error(ex.getMessage());
@@ -108,7 +109,7 @@ public class EmployeeService {
      * @return the updated EmployeeVO if successful, or empty if not found.
      */
     public Optional<EmployeeVO> updateEmployee(Long id, EmployeeVO updatedEmployee) {
-       logger.debug("updateEmployee {}", id);
+        logger.debug("updateEmployee {}", id);
         try {
             Optional<Employee> existingEmployeeOpt = employeeRepository.findById(id);
 
@@ -158,6 +159,9 @@ public class EmployeeService {
             } else {
                 throw new EmployeeNotFoundException("Employee [" + id + "] not found");
             }
+        } catch (IllegalArgumentException | EmployeeNotFoundException ex) {
+            logger.error(ex.getMessage());
+            throw ex;
         } catch (Exception ex) {
             logger.error(ex.getMessage());
             throw new UnknownErrorException(ex);
@@ -175,23 +179,35 @@ public class EmployeeService {
         logger.debug("addEmployees {}", employees);
         try {
             List<Employee> employeesToSave = employees.stream()
-                    .map(employeeVO -> new Employee(
-                            employeeVO.getFirstName(),
-                            employeeVO.getLastName(),
-                            employeeVO.getSecondLastName(),
-                            employeeVO.getAge(),
-                            Gender.valueOf(employeeVO.getGender().toUpperCase()), // Convert String gender to Enum
-                            employeeVO.getBirthDate(),
-                            employeeVO.getPosition(),
-                            EmployeeStatus.ACTIVE // Assuming new employees are active by default
-                    ))
+                    .map(employeeVO -> {
+                        try {
+                            return new Employee(
+                                    employeeVO.getFirstName(),
+                                    employeeVO.getLastName(),
+                                    employeeVO.getSecondLastName(),
+                                    employeeVO.getAge(),
+                                    Gender.valueOf(employeeVO.getGender().toUpperCase()), // Convert String gender to Enum
+                                    employeeVO.getBirthDate(),
+                                    employeeVO.getPosition(),
+                                    EmployeeStatus.ACTIVE // Assuming new employees are active by default
+                            );
+                        } catch (IllegalArgumentException e) {
+                            // Handle the case where the gender is invalid
+                            throw new IllegalArgumentException("The gender '" + employeeVO.getGender().toUpperCase() + "' does not match any of the valid options in the Gender enum: " +
+                                    String.join(", ", Arrays.stream(Gender.values()).map(Enum::name).toArray(String[]::new)));
+                        }
+                    })
                     .collect(Collectors.toList());
+
 
             List<Employee> savedEmployees = employeeRepository.saveAll(employeesToSave);
 
             return savedEmployees.stream()
                     .map(this::convertToEmployeeVO)
                     .collect(Collectors.toList());
+        } catch (IllegalArgumentException ex) {
+            logger.error(ex.getMessage());
+            throw ex;
         } catch (Exception ex) {
             logger.error(ex.getMessage());
             throw new UnknownErrorException(ex);

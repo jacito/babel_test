@@ -5,6 +5,7 @@ import com.mx.babel.employee.db.model.ErrorLog;
 import com.mx.babel.employee.db.model.enums.EmployeeStatus;
 import com.mx.babel.employee.db.model.EventLog;
 import com.mx.babel.employee.db.model.enums.EventType;
+import com.mx.babel.employee.exception.EmployeeNotFoundException;
 import com.mx.babel.employee.exception.ErrorEmployee;
 import com.mx.babel.employee.exception.Errors;
 import com.mx.babel.employee.service.EmployeeService;
@@ -74,7 +75,6 @@ public class EmployeeController {
             return new ResponseEntity<>(loadUnknownError(ex), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
 
     /**
@@ -267,6 +267,11 @@ public class EmployeeController {
                         null, null, clientIp, employeesJson, null));
                 logger.error(ex.getMessage(), ex);
                 return new ResponseEntity<>(new ErrorEmployee(ex.getMessage()), HttpStatus.BAD_REQUEST);
+            } catch (EmployeeNotFoundException ex) {
+                errorLogService.createError(new ErrorLog(null, EventType.UPDATE, ex.getMessage(),
+                        null, null, clientIp, employeesJson, null));
+                logger.error(ex.getMessage(), ex);
+                return new ResponseEntity<>(Errors.EMPLOYEE_NOT_FOUND, HttpStatus.NOT_FOUND);
             }
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
